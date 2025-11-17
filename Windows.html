@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+     <!-- 清除缓存,每次登录页面都从服务器获取数据 每次都刷新  -->
+  <meta charset="utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Expires" content="Wed, 14 Feb 1990 00:00:01 GMT">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+
+  <!-- <link rel="stylesheet" type="text/css" href="css/Android_app.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/moban.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+
+  <title>大赢家</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/images/logo.png">
+
+</head>
+<!-- <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/clipboard.min.js"></script> -->
+<!-- <script src="js/utils.js"></script> -->
+<style>
+  body,
+  p,
+  span,
+  img,
+  a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  html {
+    font-size: 16px;
+  }
+
+  #wrapper_4 {
+    background: #021f65;
+    margin: 0 auto;
+    background-size: cover;
+    width: 100%;
+    min-width: 50%;
+  }
+
+  .bg_image_4 {
+    margin: auto;
+    max-width: 750px;
+    background-image: url("images/bg_image_3.png");
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-size: contain;
+  }
+
+  .theme_4 {
+    text-align: center;
+    font-family: "微软雅黑";
+    font-size: 1.4rem;
+    margin-top: 81%;
+    color: #fff;
+    display: block;
+  }
+
+  .information_4 {
+    background-color: #011e60;
+    border: #4b70bb 1px solid;
+    max-width: 70%;
+    max-height: 100%;
+    width: auto;
+    width: 100%;
+    margin: 0.4rem auto 0.4rem auto;
+    overflow: hidden;
+    padding: 8% 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+
+<style>
+  .view {
+    background: #021f65;
+    margin: 0 auto;
+    background-size: cover;
+    width: 100%;
+    min-width: 50%;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pageTitle {
+    text-align: center;
+    font-family: "微软雅黑";
+    font-size: 1.4rem;
+    margin-top: 81%;
+    color: #fff;
+    display: block;
+  }
+
+  .downloadButton {
+    width: 130%;
+    margin: 0 auto;
+    display: block;
+    max-width: 700px;
+    height: 270px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  .downloadedTips {
+    height: 40px;
+    color: white;
+  }
+
+  .downloadInfo {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    padding: 15px 0px;
+    background-color: #011e60;
+    border: #4b70bb 1px solid;
+    max-width: 70%;
+    max-height: 100%;
+    width: auto;
+    width: 100%;
+    margin: 0.4rem auto 0.4rem auto;
+    overflow: hidden;
+    padding: 3% 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+    color: white;
+  }
+
+  .downloadInfo img {
+    /* max-width: 100%;max-height:100%;width:auto; height:auto; */
+    border-radius: 20px;
+    border: 1px solid #3f2d1e;
+    height: 6.75rem;
+    width: 6.75rem;
+    text-align: center;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .downloadInfo span {
+    margin-top: 10px;
+  }
+
+  .footer {
+    margin-top: 25px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .footer-span {
+    margin-bottom: 10px;
+  }
+
+  /* 举报弹窗 */
+  #dialog {
+    position: fixed;
+    width: 85%;
+    height: 80vh;
+    top: 0px;
+    left: 0px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  #dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  .dialog-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .dialog-button {
+    padding: 4px 16px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    color: #000;
+  }
+
+  .dialog-header,
+  .dialog-footer {
+
+    background: white;
+  }
+
+  .dialog-header {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+  }
+
+  .dialog-header-title {
+    flex: 1;
+    text-align: left;
+  }
+
+  .dialog-header-close {
+    color: white;
+    background: #4695f7;
+  }
+
+  .dialog-main {
+    flex: 1;
+    background-color: #f2f2f2;
+    padding: 20px 30px;
+    font-size: 14px;
+    overflow: overlay;
+  }
+
+  .dialog-main-tips {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #c3c3c3;
+    margin-bottom: 16px;
+  }
+
+  .dialog-footer {
+    height: 65px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .dialog-footer .dialog-button {
+    margin-right: 15px;
+  }
+
+  input {
+    outline: none;
+  }
+
+  .dialog-form-textarea {
+    margin-top: 8px;
+    width: 100%;
+    outline: none;
+    text-align: left;
+  }
+
+  .dialog-form-label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+  }
+
+  .dialog-form-label .label-span {
+    width: 40%;
+    max-width: 40%;
+    min-width: 40%;
+    margin-bottom: 8px;
+  }
+
+  .dialog-form-input {
+    height: 35px;
+    text-indent: 8px;
+    border: none;
+    background-color: white;
+  }
+
+  .dialog-form-radio {
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+  }
+
+  .footer-hign-span {
+    color: #119ff8;
+  }
+</style>
+
+<body>
+  <div id="wrapper_4">
+    <div class="bg_image_4">
+
+      <header>
+        <p class="pageTitle">大赢家</p>
+      </header>
+
+      <main class="main">
+
+        <!-- 应用信息 -->
+        <div class="downloadInfo">
+          <img id="logoDom" src="images/logo.png" alt="" class="logo">
+          <span>游戏大小：49.36 MB</span>
+          <span>更新时间：2025-1-26</span>
+        </div>
+        <!-- 下载按钮 -->
+        <img id="downloadImgDom" src="images/windows/windows.png" class="downloadButton" onclick="clickDoanload()">
+
+        <!-- 下载中提示文本 -->
+        <p class="downloadedTips" style="display: none;">软件安装中，请桌面查看！</p>
+        <!-- 二维码 -->
+        <img id="codeDom" width="168px" src="images/Android/LmvfK0122.png">
+      </main>
+
+   <!-- 底部信息 -->
+      <footer class="footer">
+
+        <p class="footer-span">或用手机浏览器输入</p>
+
+        <p class="footer-span"> <a class="footer-hign-span" onclick="statement()">网址:</a> https://dyj.us
+          <span class="footer-hign-span" onclick="copyUrl()">复制</span>
+        </p>
+
+        <p class="footer-span">页面由
+          <a class="footer-hign-span" onclick="statement()">大赢家</a>
+          提供 |
+          <a class="footer-hign-span" onclick="statement()">免责声明</a>
+          <a class="footer-hign-span footer-report" onclick="showDialog()">举报</a>
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <dialog id="dialog">
+    <form method="dialog" class="dialog-form">
+      <header class="dialog-header">
+        <span class="dialog-header-title">举报该应用</span>
+        <button type="submit" value="no" class="dialog-button dialog-header-close">取消</button>
+      </header>
+      <main class="dialog-main">
+        <p class="dialog-main-tips">我们一直致力于打击违规应用，保护知识产权。非常感谢您的举报，我们会在第一时间安排专人处理您举报的问题，并在处理之后向您反馈处理结果。<br><br>感谢您对我们的支持
+        </p>
+
+        <input type="hidden" name="appid" value="279843">
+
+        <label for="email" class="dialog-form-label">
+          <span class="label-span">你的邮箱</span>
+          <input class="dialog-form-input" id="email" name="arEmail" placeholder="Email" type="text">
+        </label>
+
+        <div class="dialog-form-label">
+          <span class="label-span">举报原因</span>
+          <label for="radio-1">
+            <input id="radio-1" class="dialog-form-radio" type="radio" name="arType" checked="checked" value="盗版"> 盗版
+          </label>
+          <label for="radio-2">
+            <input id="radio-2" class="dialog-form-radio" type="radio" name="arType" checked="checked" value="色情"> 色情
+          </label>
+          <label for="radio-3">
+            <input id="radio-3" class="dialog-form-radio" type="radio" name="arType" checked="checked" value="欺诈"> 欺诈
+          </label>
+          <label for="radio-4">
+            <input id="radio-4" class="dialog-form-radio" type="radio" name="arType" checked="checked" value="其他"> 其他
+          </label>
+          <textarea class="dialog-form-textarea" rows="5" name="arContent" id="arContent"
+            placeholder="补充举报原因，为了让您的举报能够尽快被处理，请尽可能提供详细的信息。"></textarea>
+        </div>
+      </main>
+      <footer class="dialog-footer">
+        <button class="dialog-button">取消</button>
+        <button type="sumbit" class="dialog-button">举报该应用</button>
+      </footer>
+    </form>
+  </dialog>
+</body>
+<script>
+  //let base64_data = {
+   // }
+
+  // 点击了举报
+  function showDialog() {
+    let dialogDom = document.getElementById("dialog")
+    dialogDom.showModal()
+  }
+   // 点击了复制
+  function copyUrl() {
+
+    let input = document.createElement("input")
+    input.setAttribute("readonly", "readonly")
+    input.value = "https://dyj.us"
+    document.body.appendChild(input);
+    input.setSelectionRange(0, 9999);
+    input.select();
+    document.execCommand('copy')
+    document.body.removeChild(input)
+    alert("复制成功")
+  }
+  // 点击了声明
+  function statement() {
+
+
+  }
+
+  // 点击了下载按钮
+  function clickDoanload() {
+
+    // 下载按钮DOM
+    let downloadButtonDom = document.querySelector(".downloadButton")
+    // 下载提示Dom
+    let downloadTipsDom = document.querySelector(".downloadedTips")
+    downloadButtonDom.style.display = "none"
+    downloadTipsDom.style.display = "block"
+
+    // 文件下载地址
+    let downloadFile = "https://down.xn--vhqqb859bzri4ykt03c.com/down/dyj/dyj.exe"
+
+    window.location.href = downloadFile
+  }
+  window.onload = function () {
+    let downloadImgDom = document.getElementById("downloadImgDom")
+  //  downloadImgDom.src = base64_data.downloadButton
+    let logoDom = document.getElementById("logoDom")
+ //   logoDom.src = base64_data.logo
+  }
+  // FloatAd("#floadAD");//调用
+</script>
+
+</html>

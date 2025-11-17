@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-page-login">
+<html lang="en" class="ui-page-login">
 
 <head>
     <meta charset="utf-8">
@@ -9,6 +9,9 @@
     <meta name="viewport" 
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>正在为您安装======</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/images/logo.png">
     <style>
         #weixin-tip {
             position: fixed;
@@ -34,7 +37,7 @@
             max-height: 100%;
             object-fit: cover;
         }
-    </style>
+    </link>
 </head>
 
 <body>
@@ -60,9 +63,12 @@
             if (is_weixin()) {
                 loadHtml();
             } else {
-                if (mobileSystem == "IOS") {
+                const isWindows = /Windows NT|Win32|Win64/.test(userAgent) && !/(Android|Mobile)/i.test(userAgent);
+                if (isiOS) {
                     window.location.href = "/tf/index.html";
-                } else {
+                } else if (isWindows) {
+                    window.location.href = "/Windows.html";
+                } else if (isAndroid) {
                     window.location.href = "Android.html";
                 }
             }
