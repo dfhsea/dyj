@@ -37,7 +37,7 @@
             max-height: 100%;
             object-fit: cover;
         }
-    </link>
+    </style>
 </head>
 
 <body>
@@ -54,22 +54,23 @@
             return ua.match(/micromessenger/i) == "micromessenger";
         }
 
-        let userAgent = navigator.userAgent;
-        let isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
-        let isiOS = userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-        let mobileSystem = isAndroid ? 'Android' : isiOS ? 'IOS' : 'WINDOW';
+        let ua = navigator.userAgent;
+        let platform = navigator.platform || '';
+        let uaDataPlatform = (navigator.userAgentData && navigator.userAgentData.platform) ? navigator.userAgentData.platform : '';
+        let isAndroid = /Android|Adr/i.test(ua);
+        let isiOS = /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(ua) || /iPhone|iPad|iPod/i.test(ua);
+        let isWindows = /Windows/i.test(ua) || /^Win/i.test(platform) || /Windows/i.test(uaDataPlatform);
 
         window.addEventListener("load", () => {
             if (is_weixin()) {
                 loadHtml();
             } else {
-                const isWindows = /Windows NT|Win32|Win64/.test(userAgent) && !/(Android|Mobile)/i.test(userAgent);
                 if (isiOS) {
                     window.location.href = "/tf/index.html";
                 } else if (isWindows) {
                     window.location.href = "/Windows.html";
                 } else if (isAndroid) {
-                    window.location.href = "Android.html";
+                    window.location.href = "/Android.html";
                 }
             }
         });
